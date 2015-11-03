@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "AngularJS": "angular-latest#~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "angular-animate": "1.4.7"
+  }
+}
