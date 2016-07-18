@@ -4,3 +4,4 @@
 /build/views*.js
 /build/index.html
 /build/style*.css
+node_modules

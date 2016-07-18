@@ -18,11 +18,7 @@ var gulp                 = require('gulp'),
 
 // Specify all the vendor scripts that need to be compiled and included in
 // the app.
-var vendorScripts = [
-  './bower_components/angular/angular.min.js',
-  './bower_components/angular-animate/angular-animate.min.js',
-  './bower_components/angular-ui-router/release/angular-ui-router.min.js'
-];
+var vendorScripts = ['./src/vendor/*.js'];
 
 /**
  * @desc Grab all newly created files and inject
@@ -62,7 +58,7 @@ gulp.task('vendor', function() {
  */
 gulp.task('js', function() {
   return del('./build/app*.js').then(function() {
-    gulp.src(['./src/js/app.js', './src/js/*.js'])
+    gulp.src(['./src/app/app.js', './src/app/*.js'])
       .pipe(jshint())
       .pipe(concat('app.js'))
       .pipe(rev()) // Add unique name
@@ -92,7 +88,7 @@ gulp.task('less', function() {
  */
 gulp.task('templates', function() {
   return del('./build/templates*.js').then(function() {
-    gulp.src('./src/templates/*.html')
+    gulp.src('./src/app/*.html')
       .pipe(minifyHtml({
         empty: true,
         spare: true
@@ -109,9 +105,9 @@ gulp.task('templates', function() {
  */
 gulp.task('watch', function() {
   gulp.watch('./src/less/*.less', ['less']);
-  gulp.watch('./src/js/**/*.js', ['js']);
+  gulp.watch('./src/app/**/*.js', ['js']);
   gulp.watch('./src/vendor/*.js', ['vendor']);
-  gulp.watch('./src/templates/*.html', ['templates']);
+  gulp.watch('./src/app/*.html', ['templates']);
 });
 
 /**
