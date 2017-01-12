@@ -14,7 +14,6 @@ import minifyHtml from 'gulp-minify-html';
 import ngTemplateCache from 'gulp-angular-templatecache';
 
 const appName = 'NAME OF APP';
-
 const browserSync = require('browser-sync').create();
 const vendorScripts = [
     './src/vendor/angular.min.js',
