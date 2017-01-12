@@ -11,8 +11,7 @@ Install all of these globally on you machine.
 
 #### To get started:
 1. Clone repo. In terminal ```git clone git@github.com:Orsman/angular-start.git```
-2. Run ```npm install```
-3. Run ```bower install```
+2. Run ```npm install``` or ```yarn```
 4. Open up gulpfile.js and set the name of your app
 
 
