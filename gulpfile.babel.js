@@ -5,6 +5,7 @@ import del from 'del';
 import babel from 'gulp-babel';
 import rev from 'gulp-rev';
 import sass from 'gulp-sass';
+import eslint from 'gulp-eslint';
 import concat from 'gulp-concat';
 import uglify from 'gulp-uglify';
 import inject from 'gulp-inject';
@@ -42,35 +43,32 @@ function buildIndexHtml() {
         .on('end', browserSync.reload);
 }
 
-/**
- * @desc Minify and bundle the Vendor JS
- */
+
 gulp.task('vendor', () => {
   return del('./build/vendor*.js').then(() => {
     gulp.src(vendorScripts)
       .pipe(concat('vendor.js'))
-      .pipe(rev()) // Add unique name
+      .pipe(rev())
       .pipe(gulp.dest('./build'))
       .on('end', buildIndexHtml);
   });
 });
 
-/**
- * @desc Minify and bundle the app's JavaScript
- */
+
 gulp.task('js', () => {
   return del('./build/app*.js').then(() => {
     gulp.src(['./src/config/app.module.js', './src/config/**/*.js', './src/shared/**/*.js', './src/pages/**/*.js'])
       .pipe(concat('app.js'))
-      .pipe(rev()) // Add unique name
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError())
+      .pipe(rev())
       .pipe(gulp.dest('./build'))
       .on('end', buildIndexHtml);
   });
 });
 
-/**
- * @desc Minify and bundle the app's CSS
- */
+
 gulp.task('sass', () => {
   return del('./build/style*.css').then(() => {
     gulp.src('./src/style/style.scss')
@@ -80,9 +78,6 @@ gulp.task('sass', () => {
   });
 });
 
-/**
- * @desc Minify and bundle the app's CSS
- */
 gulp.task('sass-init', () => {
   return del('./build/style*.css').then(() => {
     gulp.src('./src/style/style.scss')
